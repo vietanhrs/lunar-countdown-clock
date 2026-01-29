@@ -11,7 +11,7 @@ interface TimeLeft {
   totalSeconds: number;
 }
 
-const TARGET_DATE = new Date('2025-02-13T18:00:00');
+const TARGET_DATE = new Date('2026-02-13T18:00:00');
 
 const calculateTimeLeft = (): TimeLeft => {
   const now = new Date();
