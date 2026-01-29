@@ -57,6 +57,19 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        lunar: {
+          red: "hsl(var(--lunar-red))",
+          "red-dark": "hsl(var(--lunar-red-dark))",
+          "red-deep": "hsl(var(--lunar-red-deep))",
+          gold: "hsl(var(--lunar-gold))",
+          "gold-light": "hsl(var(--lunar-gold-light))",
+          "gold-pale": "hsl(var(--lunar-gold-pale))",
+          cream: "hsl(var(--lunar-cream))",
+        },
+      },
+      fontFamily: {
+        display: ["Cinzel", "serif"],
+        sans: ["Noto Sans SC", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
