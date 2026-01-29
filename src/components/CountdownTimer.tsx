@@ -48,15 +48,22 @@ const calculateTimeLeft = (): TimeLeft => {
 };
 
 const CountdownUnit = ({ value, label, isLarge = false }: { value: number; label: string; isLarge?: boolean }) => (
-  <div className={`countdown-card rounded-xl flex flex-col items-center justify-center ${isLarge ? 'p-6 md:p-8' : 'p-4 md:p-6'}`}>
+  <div className={`countdown-card rounded-2xl flex flex-col items-center justify-center relative overflow-hidden group hover:scale-105 transition-transform duration-300 ${isLarge ? 'p-8 md:p-12' : 'p-4 md:p-6'}`}>
+    {/* Animated glow effect */}
+    <div className="absolute inset-0 bg-gradient-to-t from-lunar-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    
+    {/* Sparkle decorations */}
+    <div className="absolute top-2 right-2 text-lg animate-pulse-slow">✨</div>
+    <div className="absolute bottom-2 left-2 text-sm animate-pulse-slow" style={{ animationDelay: '1s' }}>✨</div>
+    
     <span 
-      className={`font-display gold-text text-shadow-gold font-bold tabular-nums ${
-        isLarge ? 'text-5xl md:text-7xl lg:text-8xl' : 'text-3xl md:text-4xl lg:text-5xl'
+      className={`font-display gold-text text-shadow-gold font-bold tabular-nums relative z-10 animate-number-glow ${
+        isLarge ? 'text-6xl md:text-8xl lg:text-9xl' : 'text-3xl md:text-4xl lg:text-5xl'
       }`}
     >
       {value.toString().padStart(2, '0')}
     </span>
-    <span className={`text-muted-foreground uppercase tracking-widest mt-2 ${isLarge ? 'text-sm md:text-base' : 'text-xs md:text-sm'}`}>
+    <span className={`text-lunar-gold-pale uppercase tracking-[0.2em] mt-3 font-medium relative z-10 ${isLarge ? 'text-sm md:text-lg' : 'text-xs md:text-sm'}`}>
       {label}
     </span>
   </div>
