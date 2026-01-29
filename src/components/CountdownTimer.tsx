@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Progress } from '@/components/ui/progress';
 
 interface TimeLeft {
   days: number;
@@ -12,6 +13,7 @@ interface TimeLeft {
 }
 
 const TARGET_DATE = new Date('2026-02-13T18:00:00');
+const START_DATE = new Date('2025-01-29T00:00:00'); // Today - when the countdown started
 
 const calculateTimeLeft = (): TimeLeft => {
   const now = new Date();
@@ -83,12 +85,25 @@ const SubCountdown = ({ value, label, unit }: { value: number; label: string; un
   </div>
 );
 
+const calculateProgress = (): number => {
+  const now = new Date();
+  const totalDuration = TARGET_DATE.getTime() - START_DATE.getTime();
+  const elapsed = now.getTime() - START_DATE.getTime();
+  
+  if (elapsed <= 0) return 0;
+  if (elapsed >= totalDuration) return 100;
+  
+  return (elapsed / totalDuration) * 100;
+};
+
 const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
+  const [progress, setProgress] = useState<number>(calculateProgress());
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
+      setProgress(calculateProgress());
     }, 1000);
 
     return () => clearInterval(timer);
@@ -109,6 +124,29 @@ const CountdownTimer = () => {
         </div>
       ) : (
         <>
+          {/* Progress Bar */}
+          <div className="mb-10 px-2">
+            <div className="flex justify-between items-center mb-3">
+              <span className="text-lunar-gold-pale text-sm uppercase tracking-widest font-medium">Progress</span>
+              <span className="gold-text font-display text-lg font-bold">{progress.toFixed(2)}%</span>
+            </div>
+            <div className="relative">
+              <Progress 
+                value={progress} 
+                className="h-4 bg-lunar-red-dark/50 border border-border"
+              />
+              {/* Glow effect overlay */}
+              <div 
+                className="absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-lunar-gold/0 via-lunar-gold/30 to-lunar-gold/0 animate-pulse-slow pointer-events-none"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <div className="flex justify-between mt-2 text-xs text-muted-foreground">
+              <span>Jan 29, 2025</span>
+              <span>Feb 13, 2026</span>
+            </div>
+          </div>
+
           {/* Main Countdown */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12">
             <CountdownUnit value={timeLeft.days} label="Days" isLarge />
