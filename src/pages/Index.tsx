@@ -23,7 +23,7 @@ const Index = () => {
           Until work ends on
         </p>
         <p className="text-secondary font-semibold text-xl md:text-2xl">
-          February 13th, 2025 at 6:00 PM
+          February 13th, 2026 at 6:00 PM
         </p>
       </div>
 
