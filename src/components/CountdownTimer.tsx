@@ -13,7 +13,7 @@ interface TimeLeft {
 }
 
 const TARGET_DATE = new Date('2026-02-13T18:00:00');
-const START_DATE = new Date('2025-01-29T00:00:00'); // Today - when the countdown started
+const START_DATE = new Date('2026-01-29T00:00:00'); // When the countdown started
 
 const calculateTimeLeft = (): TimeLeft => {
   const now = new Date();
@@ -142,7 +142,7 @@ const CountdownTimer = () => {
               />
             </div>
             <div className="flex justify-between mt-2 text-xs text-muted-foreground">
-              <span>Jan 29, 2025</span>
+              <span>Jan 29, 2026</span>
               <span>Feb 13, 2026</span>
             </div>
           </div>
